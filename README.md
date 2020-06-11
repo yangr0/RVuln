@@ -6,7 +6,7 @@ https://github.com/iinc0gnit0/RVuln
 
 - [x] Input payloads with a given input
 
-- [ ] Check if a payload works on a webiste (Progress)
+- [ ] Check if a payload works on a webiste (In progress)
 
 - [ ] Get payload from a file
 
