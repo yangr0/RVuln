@@ -13,3 +13,5 @@ https://github.com/iinc0gnit0/RVuln
 - [ ] Speed up scans by multi-threading
 
 - [ ] Then finishing touches such as UI and banners
+
+![Rust](https://github.com/iinc0gnit0/RVuln/workflows/Rust/badge.svg)
