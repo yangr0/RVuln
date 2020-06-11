@@ -4,7 +4,7 @@ https://github.com/iinc0gnit0/RVuln
 
 # Roadmap
 
-[x] Input payloads with a given input
+[ x ] Input payloads with a given input
 
 [ ] Check if a payload works on a webiste
 
