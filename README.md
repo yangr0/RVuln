@@ -6,7 +6,9 @@ https://github.com/iinc0gnit0/RVuln
 
 - [x] Input payloads with a given input
 
-- [ ] Check if a payload works on a webiste (In progress)
+- [ ] Check if a XSS payload works on a webiste (In progress)
+
+- [ ] Check if a SQL injection payload works on a website
 
 - [ ] Get payload from a file
 
