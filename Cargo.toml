@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 isahc = "0.9.3"
 regex = "1.3.9"
+rayon = "1.3.0"

