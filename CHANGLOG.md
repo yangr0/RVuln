@@ -1,5 +1,5 @@
 # v0.0.1
-- Check website for basic xss testing
+- First commit
 
 # v0.0.2
 - Added read from wordlist
@@ -7,3 +7,6 @@
 
 # v0.0.3
 - Able to check for xss
+
+# v0.0.4
+- Finished UI

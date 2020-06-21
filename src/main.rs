@@ -1,14 +1,27 @@
 // Created by inc0gnit0, skript0r, p4yl0ad
-// Latest update: 6/19/20
-// Version: 0.0.3
+// Latest update: 6/21/20
+// Version: 0.0.4
 
 // Dependencies
 use isahc::prelude::*; // 0.9.3
-use rayon::prelude::*;
+use rayon::prelude::*; // 1.3.0
 use regex::Regex; // 1.3.9
 use std::fs::File;
+use std::io::{stdin, stdout, Write};
 use std::io::{BufRead, BufReader};
 use std::time::Duration;
+
+const BANNER: &str = "\x1b[95m    https://github.com/iinc0gnit0/RVuln
+\x1b[94m██████╗ ██╗   ██╗██╗   ██╗██╗     ███╗   ██╗
+██╔══██╗██║   ██║██║   ██║██║     ████╗  ██║
+██████╔╝██║   ██║██║   ██║██║     ██╔██╗ ██║
+██╔══██╗╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║
+██║  ██║ ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║
+╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+\x1b[93m=============================================\x1b[0m\n";
+
+const MENU: &str = "\x1b[92m[0]. Exit
+[1]. XSS Scan";
 
 // Main
 fn main() -> std::io::Result<()> {
@@ -17,10 +30,67 @@ fn main() -> std::io::Result<()> {
         Ok(send) => send,
         Err(_) => panic!("\x1b[91mConnection not found!\x1b[0m"),
     }
-    let wordlist = "default.txt";
-    let target_host = "https://portswigger-labs.net/xss/xss.php?x=$";
+    // MENU
+    println!("{}{}", BANNER, MENU);
+    print!("\x1b[94m[𝓡𝓥𝓾𝓵𝓷] -> ");
+    stdout().flush().unwrap();
+
+    if input()? == "1" {
+        match xss() {
+            Ok(run) => run,
+            Err(e) => println!("{}", e),
+        }
+    } else if input()? == "0" {
+        println!("Exiting...");
+        std::process::exit(1);
+    } else {
+        println!("Invalid Option")
+    }
+
+    Ok(())
+}
+
+// XSS
+fn xss() -> std::io::Result<()> {
+    print!("\n{}[2J", 27 as char);
+    // Get Target
+    print!("{}Target URL: ", BANNER);
+    stdout().flush().unwrap();
+    let target_url = &input()?;
+    // Get Wordlist
+    print!("Path to Wordlist: ");
+    stdout().flush().unwrap();
+    let wordlist = &input()?;
+    // Verbosity
+    print!("Verbose ouput? [y/n]: ");
+    stdout().flush().unwrap();
+    let mut verbose = 0;
+    if input()?.to_lowercase() == "y" {
+        verbose = 1;
+    } else if input()?.to_lowercase() == "n" {
+        verbose = 0;
+    }
+
+    match read(target_url, wordlist, verbose) {
+        Ok(run) => run,
+        Err(e) => println!("{}", e),
+    }
+
+    Ok(())
+}
+
+// Input
+fn input() -> std::io::Result<String> {
+    let mut input = String::new();
+    stdin().read_line(&mut input)?;
+    let input = input.trim();
+    Ok(input.to_owned())
+}
+
+// Read file
+fn read(target_host: &str, wordlist: &str, verbose: i8) -> std::io::Result<()> {
+    // Config variables
     let ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
-    let verbose = 1;
     let timeout = 15;
     // Reads payloads from file
     let mut payloads: Vec<String> = Vec::new();
@@ -30,7 +100,7 @@ fn main() -> std::io::Result<()> {
         let payload = payload.trim().to_owned();
         payloads.push(payload);
     }
-    // Multi-threaded request
+    // Multi-thread request
     payloads.par_iter().for_each(|url_path| {
         match request(target_host, url_path, ua, verbose, timeout) {
             Ok(request) => request,
@@ -41,7 +111,7 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 
-// XSS
+// Request
 fn request(
     host: &str,
     payload: &str,
@@ -62,11 +132,12 @@ fn request(
         .text()?;
 
     let source = request.contains(payload); // Check if source code contains payload
+
     if verbose == 0 {
         if source == true {
             println!("\x1b[92m[+] {}", url)
         } else if source == false {
-            print!("")
+            println!("");
         }
     } else if verbose == 1 {
         if source == true {
@@ -78,6 +149,7 @@ fn request(
 
     Ok(())
 }
+
 // Sanitizes URL
 fn url_encode(data: &str) -> String {
     fn str_to_ascii_num(char: &str) -> u8 {
@@ -101,6 +173,8 @@ fn url_encode(data: &str) -> String {
     }
     return buffer;
 }
+
+// Check for internet connection
 fn connection() -> Result<(), Box<dyn std::error::Error>> {
     Request::head("https://github.com")
         .timeout(Duration::new(15, 0))
