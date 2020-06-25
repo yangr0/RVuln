@@ -10,3 +10,6 @@
 
 # v0.0.4
 - Finished UI
+
+# v0.0.5
+- Improved UI
