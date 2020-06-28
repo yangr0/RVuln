@@ -16,3 +16,6 @@
 
 # v0.0.6
 - Finished XSS scanner
+
+# v0.0.7
+- Working on Documentation

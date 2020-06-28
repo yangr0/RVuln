@@ -68,7 +68,7 @@ fn xss() -> std::io::Result<()> {
     stdout().flush().unwrap();
     let wordlist = &input()?;
     // Verbosity
-    print!("\x1b[92mVerbose ouput? [y/n]: ");
+    print!("\x1b[95mVerbose ouput? [y/n]: ");
     stdout().flush().unwrap();
     let mut verbose = 0;
     if input()?.to_lowercase() == "y" {
