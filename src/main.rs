@@ -7,7 +7,7 @@ use chrono::Local; // 0.4.11
 use isahc::prelude::*; // 0.9.3
 use rayon::prelude::*; // 1.3.0
 use regex::Regex; // 1.3.9
-use std::fs::{read_to_string, File};
+use std::fs::File;
 use std::io::{stdin, stdout, Write};
 use std::io::{BufRead, BufReader};
 use std::time::Duration;
@@ -59,6 +59,10 @@ fn xss() -> std::io::Result<()> {
     print!("{}\x1b[94mTarget URL: ", BANNER);
     stdout().flush().unwrap();
     let target_url = &input()?;
+    // Get Params
+    print!("\x1b[91mQuery Parameters: ");
+    stdout().flush().unwrap();
+    let params = &input()?;
     // Get Wordlist
     print!("\x1b[93mPath to Wordlist: ");
     stdout().flush().unwrap();
@@ -73,7 +77,7 @@ fn xss() -> std::io::Result<()> {
         verbose = 0;
     }
 
-    match read_files(target_url, wordlist, verbose) {
+    match read_files(target_url, wordlist, verbose, params) {
         Ok(run) => run,
         Err(e) => println!("{}", e),
     }
@@ -90,7 +94,7 @@ fn input() -> std::io::Result<String> {
 }
 
 // Read from wordlist and header file
-fn read_files(target_host: &str, wordlist: &str, verbose: i8) -> std::io::Result<()> {
+fn read_files(target_host: &str, wordlist: &str, verbose: i8, params: &str) -> std::io::Result<()> {
     // Config variables
     let ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     let timeout = 15;
@@ -102,11 +106,9 @@ fn read_files(target_host: &str, wordlist: &str, verbose: i8) -> std::io::Result
         let payload = payload.trim().to_owned();
         payloads.push(payload);
     }
-    // Reads header from header file
-    let header = read_to_string("header.txt").expect("Something went wrong reading the file");
     // Multi-thread request
     payloads.par_iter().for_each(|url_path| {
-        match request(target_host, url_path, ua, verbose, timeout, &header) {
+        match request(target_host, url_path, ua, verbose, timeout, params) {
             Ok(request) => request,
             Err(e) => println!("\x1b[91mSomething went wrong!\nError: {}", e),
         }
@@ -122,11 +124,12 @@ fn request(
     ua: &str,
     verbose: i8,
     timeout: u64,
-    header: &str,
+    params: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // This regex below replaces $ with the payload
     let re = Regex::new("\\$").unwrap();
-    let url = re.replace(host, payload);
+    let url = format!("{}?{}", host, params);
+    let url = re.replace(&url, payload);
     let url = url_encode(&url);
     // Sends request
     let request = Request::get(url.clone())
@@ -142,15 +145,15 @@ fn request(
 
     if verbose == 0 {
         if source == true {
-            println!("\x1b[92m[{}] [+] {}", time, url)
+            println!("\x1b[92m[{}] | [+] {}", time, url)
         } else if source == false {
             print!("");
         }
     } else if verbose == 1 {
         if source == true {
-            println!("\x1b[92m[{}] [+] {}", time, url)
+            println!("\x1b[92m[{}] | [+] {}", time, url)
         } else if source == false {
-            println!("\x1b[91m[{}] [-] {}", time, url)
+            println!("\x1b[91m[{}] | [-] {}", time, url)
         }
     }
     Ok(())

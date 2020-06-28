@@ -1,17 +1,17 @@
-# RVuln
+# What is RVuln?
 
-https://github.com/iinc0gnit0/RVuln
+RVuln is multi-threaded vulnerability scanner written in Rust
 
-# Roadmap
+# Features
 
-- [x] Input payloads with a given input
+- Scans for XSS vulnerabilities
 
-- [x] Check if a XSS payload works on a webiste
+- Multi-threaded scanning
 
-- [x] Get payload from a file
+# To-Do
 
-- [x] Speed up scans by multi-threading
+- Work with cookies
 
-- [ ] Then finishing touches such as UI and banners
+# Made with ❤ by
 
-![Rust](https://github.com/iinc0gnit0/RVuln/workflows/Rust/badge.svg)
+# inc0gnit0 | skript0r | p4yl0ad

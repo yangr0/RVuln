@@ -13,3 +13,6 @@
 
 # v0.0.5
 - Improved UI
+
+# v0.0.6
+- Finished XSS scanner
