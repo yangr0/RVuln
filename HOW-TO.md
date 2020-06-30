@@ -7,12 +7,24 @@
 
 Full URL without the parameters
 
+Example: https://portswigger-labs.net/xss/xss.php?x=$
+
 ## Query Parameters
 
 Enter the query parameters
 
 Put $ where you want the payload to goes
 
+Example: x=$&y=$&z=$
+
 ## Path to Wordlist
 
 Full path to wordlist
+
+Example: /home/inc0gnit0/wordlists/super_awesome_payloads.txt
+
+# Verbose Output
+
+Verbose on will show every request
+
+Verbose off will only show payloads that are potentially vulnerable
