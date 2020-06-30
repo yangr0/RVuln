@@ -7,7 +7,7 @@
 
 Full URL without the parameters
 
-Example: https://portswigger-labs.net/xss/xss.php?x=$
+Example: https://portswigger-labs.net/xss/xss.php
 
 ## Query Parameters
 
