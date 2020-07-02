@@ -16,7 +16,10 @@ RVuln is multi-threaded vulnerability scanner written in Rust
 
 # Installation
 
-You may use the [installation guide](https://github.com/iinc0gnit0/RVuln/blob/master/Installation.md) to install
+You can install the binary [here]() (recommended)
+
+[Installation guide](https://github.com/iinc0gnit0/RVuln/blob/master/Installation.md) will be for manual installation
+
 
 # How to use?
 
