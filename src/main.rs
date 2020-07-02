@@ -20,6 +20,10 @@ const BANNER: &str = "\x1b[95m    https://github.com/iinc0gnit0/RVuln
 ██╔══██╗╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║
 ██║  ██║ ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║
 ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+
+This can not guarantee 100% accuracy
+Use this with responsibility, be ethical
+Happy bug hunting!
 \x1b[91m════════════════════════════════════════════\x1b[0m\n";
 
 const MENU: &str = "\x1b[92m[0]. Exit

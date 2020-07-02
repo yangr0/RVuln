@@ -19,3 +19,6 @@
 
 # v0.0.7
 - Working on Documentation
+
+# v0.0.8
+- Few touch ups
