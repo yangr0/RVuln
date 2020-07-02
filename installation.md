@@ -8,6 +8,10 @@
 
 `cd RVuln`
 
+Debian/Ubuntu based distributions: `sudo apt install openssl-dev`
+
+Arch based distrobutions: `sudo pacman -S openssl`
+
 `cargo build --release`
 
 `mv target/release/RVuln .`
