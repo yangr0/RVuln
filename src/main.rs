@@ -1,6 +1,6 @@
 // Created by inc0gnit0, skript0r, p4yl0ad
 // Latest update: 7/2/20
-// Version: 0.0.9
+// Version: 1.0
 
 // Dependencies
 use chrono::Local; // 0.4.11
