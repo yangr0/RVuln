@@ -1,6 +1,6 @@
 // Created by inc0gnit0, skript0r, p4yl0ad
-// Latest update: 6/21/20
-// Version: 0.0.4
+// Latest update: 7/2/20
+// Version: 0.0.9
 
 // Dependencies
 use chrono::Local; // 0.4.11
@@ -41,12 +41,13 @@ fn main() -> std::io::Result<()> {
     print!("\x1b[94m[ 𝓡𝓥𝓾𝓵𝓷 ] -> ");
     stdout().flush().unwrap();
 
-    if input()? == "1" {
+    let input = input()?;
+    if input == "1" {
         match xss() {
             Ok(run) => run,
             Err(e) => println!("{}", e),
         }
-    } else if input()? == "0" {
+    } else if input == "0" {
         println!("Exiting...");
         std::process::exit(1);
     } else {
@@ -75,9 +76,10 @@ fn xss() -> std::io::Result<()> {
     print!("\x1b[95mVerbose ouput? [y/n]: ");
     stdout().flush().unwrap();
     let mut verbose = 0;
-    if input()?.to_lowercase() == "y" {
+    let verbose_input = input()?;
+    if verbose_input.to_lowercase() == "y" {
         verbose = 1;
-    } else if input()?.to_lowercase() == "n" {
+    } else if verbose_input.to_lowercase() == "n" {
         verbose = 0;
     }
 

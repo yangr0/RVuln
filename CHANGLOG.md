@@ -22,3 +22,6 @@
 
 # v0.0.8
 - Few touch ups
+
+# 0.0.9
+- Fixed input bug
