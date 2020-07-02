@@ -14,4 +14,8 @@ RVuln is multi-threaded vulnerability scanner written in Rust
 
 - Work with cookies
 
-### Made with ❤ by inc0gnit0 | skript0r | p4yl0ad
+# How to use?
+
+A quick and easy documentation [here](https://github.com/iinc0gnit0/RVuln/blob/master/HOW-TO.md)
+
+### Made with ❤ by [inc0gnit0](https://github.com/iinc0gnit0) | [skript0r](https://github.com/green0ctagon) | [p4yl0ad](https://github.com/p4yl0ad)
