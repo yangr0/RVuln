@@ -1,6 +1,8 @@
 # What is RVuln?
 
 ![Rust](https://github.com/iinc0gnit0/RVuln/workflows/Rust/badge.svg)
+![GitHub followers](https://img.shields.io/github/followers/iinc0gnit0?style=social)
+![GitHub stars](https://img.shields.io/github/stars/iinc0gnit0/RVuln?style=social)
 
 RVuln is multi-threaded vulnerability scanner written in Rust
 
