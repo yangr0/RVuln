@@ -3,6 +3,12 @@
 ## Example:
 ![screenshot](https://github.com/iinc0gnit0/RVuln/blob/master/screenshot.png)
 
+# Start up the tool
+
+`./RVuln`
+
+You can add this to `/usr/bin` if you want to access it anywhere
+
 ## Target URL
 
 Full URL without the parameters
