@@ -16,6 +16,14 @@ RVuln is multi-threaded vulnerability scanner written in Rust
 
 - Work with cookies
 
+# Supported Operating Systems
+
+- Ubuntu/Debian based OS
+
+- Arch linux based OS
+
+- Windows 10
+
 # Installation
 
 You can install the binary [here](https://github.com/iinc0gnit0/RVuln/releases/) (recommended)
