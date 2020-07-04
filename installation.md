@@ -24,4 +24,4 @@ Then download the zip https://github.com/iinc0gnit0/RVuln/archive/master.zip and
 
 Go to the directory RVuln directory in and use do `cargo build --release`
 
-The executable will be located in target/release
+The executable will be located at `target/release/RVuln.exe`
