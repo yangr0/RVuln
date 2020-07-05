@@ -16,7 +16,7 @@ Arch based distrobutions: `sudo pacman -S openssl`
 
 `mv target/release/RVuln .`
 
-# Windows 10
+# Windows 10 (won't give you the best experience)
 
 Go to the follwoing link to install Rust https://turreta.com/2019/09/06/how-to-install-rust-on-windows-10/
 
