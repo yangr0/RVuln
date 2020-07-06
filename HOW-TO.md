@@ -19,7 +19,7 @@ Example: https://portswigger-labs.net/xss/xss.php
 
 Enter the query parameters
 
-Put $ where you want the payload to goes
+Put $ where you want the payload to go
 
 Example: x=$&y=$&z=$
 
