@@ -20,6 +20,7 @@ const BANNER: &str = "\x1b[95m    https://github.com/iinc0gnit0/RVuln
 ██╔══██╗╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║
 ██║  ██║ ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║
 ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+                  v1.0
 
 This can not guarantee 100% accuracy
 Use this with responsibility, be ethical
@@ -73,7 +74,7 @@ fn xss() -> std::io::Result<()> {
     stdout().flush().unwrap();
     let wordlist = &input()?;
     // Verbosity
-    print!("\x1b[95mVerbose ouput? [y/n]: ");
+    print!("\x1b[95mVerbose output? [y/n]: ");
     stdout().flush().unwrap();
     let mut verbose = 0;
     let verbose_input = input()?;
@@ -151,15 +152,15 @@ fn request(
 
     if verbose == 0 {
         if source == true {
-            println!("\x1b[92m[{}] | [+] {}", time, url)
+            println!("\x1b[92m[{}]  | [+] {}", time, url)
         } else if source == false {
             print!("");
         }
     } else if verbose == 1 {
         if source == true {
-            println!("\x1b[92m[{}] | [+] {}", time, url)
+            println!("\x1b[92m[{}]  | [+] {}", time, url)
         } else if source == false {
-            println!("\x1b[91m[{}] | [-] {}", time, url)
+            println!("\x1b[91m[{}]  | [-] {}", time, url)
         }
     }
     Ok(())
