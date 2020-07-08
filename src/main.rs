@@ -1,6 +1,6 @@
 // Created by inc0gnit0, skript0r, p4yl0ad
-// Latest update: 7/2/20
-// Version: 1.0
+// Latest update: 7/7/20
+// Version: 1.2
 
 // Dependencies
 use chrono::Local; // 0.4.11
@@ -20,7 +20,7 @@ const BANNER: &str = "\x1b[95m    https://github.com/iinc0gnit0/RVuln
 ██╔══██╗╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║
 ██║  ██║ ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║
 ╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝
-                  v1.0
+                  v1.2
 
 This can not guarantee 100% accuracy
 Use this with responsibility, be ethical
@@ -46,7 +46,7 @@ fn main() -> std::io::Result<()> {
     if input == "1" {
         match xss() {
             Ok(run) => run,
-            Err(e) => println!("{}", e),
+            Err(e) => println!("Error: {}", e),
         }
     } else if input == "0" {
         println!("Exiting...");
@@ -86,7 +86,7 @@ fn xss() -> std::io::Result<()> {
 
     match read_files(target_url, wordlist, verbose, params) {
         Ok(run) => run,
-        Err(e) => println!("{}", e),
+        Err(e) => println!("Error: {}", e),
     }
 
     Ok(())
@@ -152,15 +152,18 @@ fn request(
 
     if verbose == 0 {
         if source == true {
-            println!("\x1b[92m[{}]  | [+] {}", time, url)
+            println!("\x1b[92m[{}] | [+] {}
+\x1b[93m═════════════════════════════════════════════════════════", time, url)
         } else if source == false {
             print!("");
         }
     } else if verbose == 1 {
         if source == true {
-            println!("\x1b[92m[{}]  | [+] {}", time, url)
+            println!("\x1b[92m[{}] | [+] {}
+\x1b[93m═════════════════════════════════════════════════════════", time, url)
         } else if source == false {
-            println!("\x1b[91m[{}]  | [-] {}", time, url)
+            println!("\x1b[91m[{}] | [-] {}
+\x1b[93m═════════════════════════════════════════════════════════", time, url)
         }
     }
     Ok(())
