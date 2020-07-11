@@ -1,6 +1,6 @@
 // Created by inc0gnit0, skript0r, p4yl0ad
-// Latest update: 7/7/20
-// Version: 1.2
+// Latest update: 7/11/20
+// Version: 1.3
 
 // Dependencies
 use chrono::Local; // 0.4.11
@@ -19,8 +19,10 @@ const BANNER: &str = "\x1b[95m    https://github.com/iinc0gnit0/RVuln
 ██████╔╝██║   ██║██║   ██║██║     ██╔██╗ ██║
 ██╔══██╗╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║
 ██║  ██║ ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║
-╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝
-                  v1.2
+╚═╝  ╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝\x1b[91m
+Made with ❤ by inc0gnit0 | skript0r | p4yl0ad\x1b[93m
+
+                  v1.3\x1b[94m
 
 This can not guarantee 100% accuracy
 Use this with responsibility, be ethical
@@ -76,12 +78,12 @@ fn xss() -> std::io::Result<()> {
     // Verbosity
     print!("\x1b[95mVerbose output? [y/n]: ");
     stdout().flush().unwrap();
-    let mut verbose = 0;
+    let mut verbose = false;
     let verbose_input = input()?;
     if verbose_input.to_lowercase() == "y" {
-        verbose = 1;
+        verbose = true;
     } else if verbose_input.to_lowercase() == "n" {
-        verbose = 0;
+        verbose = false;
     }
 
     match read_files(target_url, wordlist, verbose, params) {
@@ -101,7 +103,7 @@ fn input() -> std::io::Result<String> {
 }
 
 // Read from wordlist and header file
-fn read_files(target_host: &str, wordlist: &str, verbose: i8, params: &str) -> std::io::Result<()> {
+fn read_files(target_host: &str, wordlist: &str, verbose: bool, params: &str) -> std::io::Result<()> {
     // Config variables
     let ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
     let timeout = 15;
@@ -129,7 +131,7 @@ fn request(
     host: &str,
     payload: &str,
     ua: &str,
-    verbose: i8,
+    verbose: bool,
     timeout: u64,
     params: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
@@ -150,14 +152,14 @@ fn request(
 
     let time = Local::now().format("%T");
 
-    if verbose == 0 {
+    if verbose == false {
         if source == true {
             println!("\x1b[92m[{}] | [+] {}
 \x1b[93m═════════════════════════════════════════════════════════", time, url)
         } else if source == false {
             print!("");
         }
-    } else if verbose == 1 {
+    } else if verbose == true {
         if source == true {
             println!("\x1b[92m[{}] | [+] {}
 \x1b[93m═════════════════════════════════════════════════════════", time, url)

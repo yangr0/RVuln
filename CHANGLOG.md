@@ -8,3 +8,7 @@
 # v1.2
 - Better UI
 - Updated README
+
+# v1.3
+- Changed UI
+- Bug fixes
