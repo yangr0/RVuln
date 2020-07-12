@@ -6,7 +6,7 @@
 
 RVuln is multi-threaded vulnerability scanner written in Rust
 
-[![asciicast](https://asciinema.org/a/m0caJnvgmGb4cL9gmexp9tj14.svg)](https://asciinema.org/a/m0caJnvgmGb4cL9gmexp9tj14)
+![RVuln](https://github.com/iinc0gnit0/RVuln/blob/master/RVuln.gif)
 
 # Features
 
